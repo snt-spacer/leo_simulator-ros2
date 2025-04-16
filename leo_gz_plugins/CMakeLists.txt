@@ -7,37 +7,20 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 
+find_package(gz_plugin_vendor REQUIRED)
+find_package(gz-plugin REQUIRED)
+
+find_package(gz_sim_vendor REQUIRED)
+find_package(gz-sim REQUIRED)
+
 add_library(leo_gz_differential_plugin SHARED
-src/differential_system.cpp)
+  src/differential_system.cpp
+)
 
-if(DEFINED ENV{GZ_VERSION} AND "$ENV{GZ_VERSION}" STREQUAL "garden")
-  find_package(gz-plugin2 REQUIRED COMPONENTS register)
-  set(GZ_PLUGIN_VER ${gz-plugin2_VERSION_MAJOR})
-
-  find_package(gz-sim7 REQUIRED)
-  set(GZ_SIM_VER ${gz-sim7_VERSION_MAJOR})
-
-  target_link_libraries(leo_gz_differential_plugin
-    gz-sim${GZ_SIM_VER}::gz-sim${GZ_SIM_VER}
-    gz-plugin${GZ_PLUGIN_VER}::gz-plugin${GZ_PLUGIN_VER}
-  )
-else()
-  #If GZ_VERSION is not set default to Fortress
-  find_package(ignition-plugin1 REQUIRED COMPONENTS register)
-  set(IGN_PLUGIN_VER ${ignition-plugin1_VERSION_MAJOR})
-
-  find_package(ignition-gazebo6 REQUIRED)
-  set(IGN_GAZEBO_VER ${ignition-gazebo6_VERSION_MAJOR})
-
-  add_definitions(-DUSE_IGNITION)
-
-  target_link_libraries(leo_gz_differential_plugin
-    ignition-gazebo${IGN_GAZEBO_VER}::ignition-gazebo${IGN_GAZEBO_VER}
-    ignition-plugin${IGN_PLUGIN_VER}::ignition-plugin${IGN_PLUGIN_VER}
-  )
-endif()
-
-set_property(TARGET leo_gz_differential_plugin PROPERTY CXX_STANDARD 17)
+target_link_libraries(leo_gz_differential_plugin
+  gz-sim::core
+  gz-plugin::core
+)
 
 install(
   TARGETS
@@ -50,6 +33,7 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+ament_environment_hooks("${CMAKE_CURRENT_SOURCE_DIR}/hooks/gz_sim_system_plugin_path.sh")
 ament_environment_hooks("${CMAKE_CURRENT_SOURCE_DIR}/hooks/gz_sim_system_plugin_path.dsv")
 
 ament_package()

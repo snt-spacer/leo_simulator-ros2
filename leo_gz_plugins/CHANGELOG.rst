@@ -2,6 +2,27 @@
 Changelog for package leo_gz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.0.2 (2025-04-11)
+------------------
+
+2.0.1 (2024-11-08)
+------------------
+* Add dummy .sh files for .dsv hooks (`#8 <https://github.com/LeoRover/leo_simulator-ros2/issues/8>`_)
+* Contributors: Jan Hernas
+
+2.0.0 (2024-04-27)
+------------------
+* Get rid of all the ignition references
+* Use gz vendor packages
+* Contributors: Błażej Sowa
+
+1.1.0 (2024-04-27)
+------------------
+* Update package dependencies
+* Fix build for Gazebo Harmonic
+* Set new GZ variables to work on Gazebo Harmonic
+* Contributors: Błażej Sowa
+
 1.0.0 (2023-11-08)
 ------------------
 * Fix warning about unused parameter
