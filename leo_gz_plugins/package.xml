@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
     <name>leo_gz_plugins</name>
-    <version>1.0.0</version>
+    <version>2.0.2</version>
 
     <description>Plugins for Leo Rover Gazebo simulation in ROS 2</description>
 
@@ -11,14 +11,9 @@
     <author email="janek@fictionlab.pl">Jan Hernas</author>
 
     <buildtool_depend>ament_cmake</buildtool_depend>
-    <!-- Garden -->
-    <depend condition="$GZ_VERSION == garden or $IGNITION_VERSION == garden">gz-plugin2</depend>
-    <depend condition="$GZ_VERSION == garden or $IGNITION_VERSION == garden">gz-sim7</depend>
-    <!-- Fortress (default) -->
-    <depend condition="$GZ_VERSION == fortress or $IGNITION_VERSION == fortress">gz-plugin</depend>
-    <depend condition="$GZ_VERSION == fortress or $IGNITION_VERSION == fortress">gz-sim6</depend>
-    <depend condition="$GZ_VERSION == '' and $IGNITION_VERSION == ''">gz-plugin</depend>
-    <depend condition="$GZ_VERSION == '' and $IGNITION_VERSION == ''">gz-sim6</depend>
+
+    <depend>gz_plugin_vendor</depend>
+    <depend>gz_sim_vendor</depend>
 
     <test_depend>ament_lint_auto</test_depend>
     <test_depend>ament_cmake_copyright</test_depend>
