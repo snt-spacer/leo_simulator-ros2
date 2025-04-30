@@ -22,8 +22,9 @@
 import os
 
 from ament_index_python.packages import get_package_share_directory
-from launch import LaunchContext, LaunchDescription
 from launch.actions import DeclareLaunchArgument, OpaqueFunction
+from launch.launch_context import LaunchContext
+from launch.launch_description import LaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 import xacro
@@ -84,13 +85,13 @@ def spawn_robot(context: LaunchContext, namespace: LaunchConfiguration):
         executable="parameter_bridge",
         name=node_name_prefix + "parameter_bridge",
         arguments=[
-            robot_ns + "/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist",
-            robot_ns + "/odom@nav_msgs/msg/Odometry[ignition.msgs.Odometry",
-            robot_ns + "/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V",
-            robot_ns + "/imu/data_raw@sensor_msgs/msg/Imu[ignition.msgs.IMU",
+            robot_ns + "/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist",
+            robot_ns + "/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry",
+            robot_ns + "/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V",
+            robot_ns + "/imu/data_raw@sensor_msgs/msg/Imu[gz.msgs.IMU",
             robot_ns
-            + "/camera/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo",
-            robot_ns + "/joint_states@sensor_msgs/msg/JointState[ignition.msgs.Model",
+            + "/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
+            robot_ns + "/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model",
         ],
         parameters=[
             {
