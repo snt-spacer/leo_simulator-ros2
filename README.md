@@ -66,10 +66,41 @@ Launch agruments:
     
   Example:
    ```
-   ros2 launch leo_gz_bringup leo_gz.launch.py sim_world:=~/ros2_ws/src/leo_simulator-ros2/leo_gz_worlds/worlds/lunalab2024.sdf' robot_ns:=your_namespace
+   ros2 launch leo_gz_bringup leo_gz.launch.py sim_world:='~/ws/src/leo_simulator-ros2/leo_gz_worlds/worlds/lunalab2024.sdf' robot_ns:=your_namespace
    ```
 Add another leo rover to an already running gazebo world:
 
 ```
 ros2 launch leo_gz_bringup spawn_robot.launch.py robot_ns:=leo2
 ```
+
+
+### Run Simulation with new LiDAR mount
+
+
+Clone Alexandre-Frantz leo description package:
+
+```
+cd ~/ws/src
+git clone https://github.com/Alexandre-Frantz/leo-common-ros2.git -b <distro>
+```
+
+Rebuild and source:
+```
+colcon build --symlink-install
+source install/setup.bash
+```
+
+Export the Gazebo resource path for the modified leo_description package:
+```
+# For jazzy:
+export GZ_SIM_RESOURCE_PATH="$(ros2 pkg prefix leo_description)/share:$GZ_SIM_RESOURCE_PATH"
+# For humble:
+export IGN_GAZEBO_RESOURCE_PATH"$(ros2 pkg prefix leo_description)/share:$IGN_GAZEBO_RESOURCE_PATH"
+```
+
+Run the simulator (robot namespace unsupported):
+```
+ros2 launch leo_gz_bringup leo_gz.launch.py sim_world:='~/ws/src/leo_simulator-ros2/leo_gz_worlds/worlds/lunalab2024.sdf'
+```
+
