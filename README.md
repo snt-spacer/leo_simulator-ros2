@@ -39,7 +39,7 @@ Rolling binaries are available for Gazebo Harmonic. They are hosted at https://p
 1. Clone this repository into the workspace:
    ```
    cd ~/ws/src
-   git clone https://github.com/LeoRover/leo_simulator-ros2 -b <distro>
+   git clone https://github.com/snt-spacer/leo_simulator-ros2.git -b <distro>
    ```
 1. Install dependencies using [rosdep](https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html#how-do-i-use-the-rosdep-tool):
    ```
